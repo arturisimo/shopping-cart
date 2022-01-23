@@ -1,37 +1,29 @@
 package edu.cloud.apps.domain;
 
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 
 
 @Entity
 public class ShoppingCart {
 
     @Id
-    @Column(nullable = false, updatable = false)
-    @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 10000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
     private Boolean finalized;
-
-    @OneToMany
-    private Set<Product> shoppingCartProducts;
+    
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<ProductCart> products;
 
     public Long getId() {
         return id;
@@ -49,12 +41,12 @@ public class ShoppingCart {
         this.finalized = finalized;
     }
 
-    public Set<Product> getShoppingCartProducts() {
-        return shoppingCartProducts;
-    }
+	public Set<ProductCart> getProducts() {
+		return products;
+	}
 
-    public void setShoppingCartProducts(final Set<Product> shoppingCartProducts) {
-        this.shoppingCartProducts = shoppingCartProducts;
-    }
+	public void setProducts(Set<ProductCart> products) {
+		this.products = products;
+	}
 
 }

@@ -5,24 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-
 
 @Entity
 public class Product {
 
     @Id
-    @Column(nullable = false, updatable = false)
-    @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 10000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -34,11 +22,18 @@ public class Product {
     @Column(nullable = false)
     private String name;
     
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shopping_cart_id", nullable = false)
-//    private ShoppingCart shoppingCart;
+    public Product() {
+		super();
+	}
 
-    public Long getId() {
+	public Product(String brand, Integer stock, String name) {
+		super();
+		this.brand = brand;
+		this.stock = stock;
+		this.name = name;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -69,13 +64,5 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	public ShoppingCart getShoppingCart() {
-//        return shoppingCart;
-//    }
-//
-//    public void setShoppingCart(final ShoppingCart shoppingCart) {
-//        this.shoppingCart = shoppingCart;
-//    }
 
 }

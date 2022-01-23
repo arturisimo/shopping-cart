@@ -1,9 +1,9 @@
 package edu.cloud.apps.rest;
 
-import edu.cloud.apps.model.ProductDTO;
-import edu.cloud.apps.service.ProductService;
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import edu.cloud.apps.domain.Product;
+import edu.cloud.apps.model.ProductDTO;
+import edu.cloud.apps.service.ProductService;
 
 
 @RestController
@@ -38,7 +42,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createProduct(@RequestBody @Valid final ProductDTO productDTO) {
+    public ResponseEntity<Product> createProduct(@RequestBody @Valid final ProductDTO productDTO) {
         return new ResponseEntity<>(productService.create(productDTO), HttpStatus.CREATED);
     }
 

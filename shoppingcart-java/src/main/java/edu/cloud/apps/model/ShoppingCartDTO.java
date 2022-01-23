@@ -1,16 +1,31 @@
 package edu.cloud.apps.model;
 
-import javax.validation.constraints.NotNull;
-
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class ShoppingCartDTO {
 
     private Long id;
 
-    @NotNull
     private Boolean finalized;
+    
+    private Set<ProductCartDTO> products;
 
-    public Long getId() {
+    public Set<ProductCartDTO> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<ProductCartDTO> products) {
+		this.products = products;
+	}
+
+	public ShoppingCartDTO() {
+		super();
+		this.finalized = Boolean.FALSE;
+		this.products = new LinkedHashSet<>();
+	}
+
+	public Long getId() {
         return id;
     }
 
