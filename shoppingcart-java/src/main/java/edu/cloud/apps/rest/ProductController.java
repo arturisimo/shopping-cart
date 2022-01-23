@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,46 +17,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.cloud.apps.domain.Product;
-import edu.cloud.apps.model.ProductDTO;
-import edu.cloud.apps.service.ProductService;
-
+import edu.cloud.apps.adapters.web.ProductAdapter;
+import edu.cloud.apps.adapters.web.dto.ProductRequestDTO;
+import edu.cloud.apps.adapters.web.dto.ProductResponseDTO;
 
 @RestController
 @RequestMapping(value = "/api/products", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
-
-    private final ProductService productService;
-
-    public ProductController(final ProductService productService) {
-        this.productService = productService;
-    }
+	
+	@Autowired
+	ProductAdapter productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+    public ResponseEntity<List<ProductResponseDTO>> getAllProducts() {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProduct(@PathVariable final Long id) {
+    public ResponseEntity<ProductResponseDTO> getProduct(@PathVariable final Long id) {
         return ResponseEntity.ok(productService.get(id));
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody @Valid final ProductDTO productDTO) {
+    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody @Valid final ProductRequestDTO productDTO) {
         return new ResponseEntity<>(productService.create(productDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}/stock/{quantity}")
-    public ResponseEntity<Void> updateProduct(@PathVariable final Long id, @PathVariable final Integer quantity) {
-        productService.updateStock(id, quantity);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable final Long id, @PathVariable final Integer quantity) {
+    	return ResponseEntity.ok(productService.updateStock(id, quantity));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable final Long id) {
-        productService.delete(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ProductResponseDTO> deleteProduct(@PathVariable final Long id) {
+    	return ResponseEntity.ok(productService.delete(id));
     }
 
 }

@@ -1,9 +1,9 @@
 package edu.cloud.apps.config;
 
-import edu.cloud.apps.model.ErrorResponse;
-import edu.cloud.apps.model.FieldError;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
+
+import edu.cloud.apps.model.ErrorResponse;
+import edu.cloud.apps.model.FieldError;
 
 
 @RestControllerAdvice(annotations = RestController.class)
@@ -44,6 +47,14 @@ public class RestExceptionHandler {
         errorResponse.setException(exception.getClass().getSimpleName());
         errorResponse.setFieldErrors(fieldErrors);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorResponse> handle404(final Throwable exception) {
+        final ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setHttpStatus(HttpStatus.NOT_FOUND.value());
+        errorResponse.setException(exception.getClass().getSimpleName());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Throwable.class)

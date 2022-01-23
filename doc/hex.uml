@@ -1,0 +1,56 @@
+@startuml
+
+allowmixing
+
+
+title "Arquitectura Hexagonal shopping-cart"
+	
+	actor Usuario
+
+	package rest {
+		class CartController
+	}
+	
+	package adapters.web {
+		class CartAdapter	
+		package dto
+	}
+
+	package domain {
+		
+		class CartUseCaseImpl
+		
+		package ports {
+			
+			package web {
+				interface CartUseCase
+			}
+			package db {
+				interface CartRepositoryUseCase
+			}
+		}
+		package model {}
+	}	
+		
+	package adapters.db {
+		class CartRepositoryAdapter
+		
+		package entity {}
+	}
+	
+	package repository {
+		interface CartRepository
+	}	
+
+
+
+Usuario --> CartController
+CartController ..> CartAdapter
+CartAdapter .right.> CartUseCase
+CartUseCase <|.. CartUseCaseImpl
+CartUseCaseImpl ..> CartRepositoryUseCase
+CartRepositoryUseCase <|.. CartRepositoryAdapter
+CartRepositoryAdapter ..> CartRepository
+
+
+@enduml

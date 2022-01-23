@@ -1,4 +1,4 @@
-package edu.cloud.apps.domain;
+package edu.cloud.apps.adapters.db.entity;
 
 import java.util.Set;
 
@@ -11,9 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
-@Entity
-public class ShoppingCart {
+@Entity(name="shoppingcart")
+public class CartEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +22,7 @@ public class ShoppingCart {
     private Boolean finalized;
     
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<ProductCart> products;
+    private Set<ProductCartEntity> products;
 
     public Long getId() {
         return id;
@@ -41,11 +40,11 @@ public class ShoppingCart {
         this.finalized = finalized;
     }
 
-	public Set<ProductCart> getProducts() {
+	public Set<ProductCartEntity> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<ProductCart> products) {
+	public void setProducts(Set<ProductCartEntity> products) {
 		this.products = products;
 	}
 

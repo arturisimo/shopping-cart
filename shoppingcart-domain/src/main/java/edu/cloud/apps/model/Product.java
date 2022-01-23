@@ -1,25 +1,15 @@
-package edu.cloud.apps.domain;
+package edu.cloud.apps.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import edu.cloud.apps.exception.StockException;
 
-@Entity
 public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
     private String brand;
 
-    @Column(nullable = false)
     private Integer stock;
     
-    @Column(nullable = false)
     private String name;
     
     public Product() {
@@ -54,6 +44,7 @@ public class Product {
     }
 
     public void setStock(final Integer stock) {
+    	if (stock < 0) throw new StockException(name);
         this.stock = stock;
     }
     
@@ -64,5 +55,9 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	
+	
+	
+	
 }

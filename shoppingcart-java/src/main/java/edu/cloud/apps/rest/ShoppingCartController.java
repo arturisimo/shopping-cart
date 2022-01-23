@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,52 +17,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.cloud.apps.model.ShoppingCartDTO;
-import edu.cloud.apps.service.ShoppingCartService;
+import edu.cloud.apps.adapters.web.CartAdapter;
+import edu.cloud.apps.adapters.web.dto.CartResponseDTO;
+import edu.cloud.apps.dto.ShoppingCartDTO;
 
 
 @RestController
 @RequestMapping(value = "/api/shoppingcarts", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ShoppingCartController {
 
-    private final ShoppingCartService shoppingCartService;
-
-    public ShoppingCartController(final ShoppingCartService shoppingCartService) {
-        this.shoppingCartService = shoppingCartService;
-    }
-
+	@Autowired
+	CartAdapter shoppingCartService;
+	
     @GetMapping
-    public ResponseEntity<List<ShoppingCartDTO>> getAllShoppingCarts() {
+    public ResponseEntity<List<CartResponseDTO>> getAllShoppingCarts() {
         return ResponseEntity.ok(shoppingCartService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ShoppingCartDTO> getShoppingCart(@PathVariable final Long id) {
+    public ResponseEntity<CartResponseDTO> getShoppingCart(@PathVariable final Long id) {
         return ResponseEntity.ok(shoppingCartService.get(id));
     }
 
     @PostMapping
-    public ResponseEntity<ShoppingCartDTO> createShoppingCart(
+    public ResponseEntity<CartResponseDTO> createShoppingCart(
             @RequestBody @Valid final ShoppingCartDTO shoppingCartDTO) {
         return new ResponseEntity<>(shoppingCartService.create(shoppingCartDTO), HttpStatus.CREATED);
     }
     
     @PostMapping("/{id}/product/{productId}/quantity/{quantity}")
-    public ResponseEntity<ShoppingCartDTO> addProduct(@PathVariable final Long id, @PathVariable final Long productId, @PathVariable final Integer quantity) {
-        ShoppingCartDTO shoppingCartDTO = shoppingCartService.addProduct(id, productId, quantity);
-		return ResponseEntity.ok(shoppingCartDTO);
+    public ResponseEntity<CartResponseDTO> addProduct(@PathVariable final Long id, @PathVariable final Long productId, @PathVariable final Integer quantity) {
+       return ResponseEntity.ok(shoppingCartService.addProduct(id, productId, quantity));
     }
     
     @PatchMapping("/{id}")
-    public ResponseEntity<ShoppingCartDTO> finalizeShoppingCart(@PathVariable final Long id) {
-    	ShoppingCartDTO shoppingCartDTO = shoppingCartService.finalizeShoppingCart(id);
-    	return ResponseEntity.ok(shoppingCartDTO);
+    public ResponseEntity<CartResponseDTO> finalizeShoppingCart(@PathVariable final Long id) {
+    	return ResponseEntity.ok(shoppingCartService.finalizeShoppingCart(id));
     }
     
     @DeleteMapping("/{id}/product/{productId}")
-    public ResponseEntity<ShoppingCartDTO> deleteShoppingCart(@PathVariable final Long id, @PathVariable final Long productId) {
-    	ShoppingCartDTO shoppingCartDTO = shoppingCartService.delete(id, productId);
-        return ResponseEntity.ok(shoppingCartDTO);
+    public ResponseEntity<CartResponseDTO> deleteShoppingCart(@PathVariable final Long id, @PathVariable final Long productId) {
+    	return ResponseEntity.ok(shoppingCartService.delete(id, productId));
     }
 
 }

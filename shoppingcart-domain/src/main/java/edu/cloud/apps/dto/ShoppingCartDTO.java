@@ -1,4 +1,4 @@
-package edu.cloud.apps.model;
+package edu.cloud.apps.dto;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

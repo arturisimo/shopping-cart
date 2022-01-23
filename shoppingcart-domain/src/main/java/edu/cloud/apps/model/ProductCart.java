@@ -1,24 +1,13 @@
-package edu.cloud.apps.domain;
+package edu.cloud.apps.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import edu.cloud.apps.exception.StockException;
 
-@Entity
 public class ProductCart {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
     private Integer quantity;
     
-    @OneToOne(fetch=FetchType.EAGER) 
     private Product product;
     
     public ProductCart() {
@@ -28,6 +17,7 @@ public class ProductCart {
 	public ProductCart(Product product, Integer quantity) {
 		this.product = product;
 		this.quantity = quantity;
+		this.validateStock();
 	}
 
 	public Long getId() {
@@ -53,7 +43,12 @@ public class ProductCart {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
+	
+	public void validateStock() {
+		Integer newStock = product.getStock() - getQuantity();
+		if (newStock < 0)
+			throw new StockException(product.getName());
+	}
     
 
 }

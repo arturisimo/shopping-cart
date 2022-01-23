@@ -1,8 +1,8 @@
 package edu.cloud.apps.repos;
 
-import edu.cloud.apps.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import edu.cloud.apps.adapters.db.entity.ProductEntity;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 }

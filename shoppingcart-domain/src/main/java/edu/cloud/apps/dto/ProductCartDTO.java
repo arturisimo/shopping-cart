@@ -1,10 +1,18 @@
-package edu.cloud.apps.model;
+package edu.cloud.apps.dto;
 
 public class ProductCartDTO {
 	
 	ProductDTO product;
 	Integer quantity;
 	
+	public ProductCartDTO() {
+		super();
+	}
+	public ProductCartDTO(ProductDTO product, Integer quantity) {
+		super();
+		this.product = product;
+		this.quantity = quantity;
+	}
 	public ProductDTO getProduct() {
 		return product;
 	}
