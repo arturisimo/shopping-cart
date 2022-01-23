@@ -1,6 +1,9 @@
 # shopping-cart
 Ejemplo arquitectura hexagonal. SpringBoot - NodeJS
 
+
+![Hexagonal](doc/hex.png)
+
 Aplicación de comercio electrónico. La aplicación proporciona dos casos de uso diferentes:
 
 ## CRUD de productos
@@ -20,7 +23,7 @@ API REST Product:
 * DELETE /api/products/:id - Borra un producto en específico
 
 
-##Gestión del carrito de la compra
+## Gestión del carrito de la compra
 
 * Añadir productos al carrito
 * Eliminar productos del carrito
