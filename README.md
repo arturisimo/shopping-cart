@@ -6,6 +6,8 @@ Aplicación de comercio electrónico. La aplicación proporciona dos casos de us
 ![Hexagonal](doc/hex.png)
 
 
+![ER](doc/ER.png)
+
 ## Open Api
 
 http://localhost:8080/swagger-ui/index.html
@@ -15,6 +17,12 @@ http://localhost:8080/swagger-ui/index.html
 http://localhost:8080/h2-console/
 
 jdbc:h2:mem:shoppingcart-java
+
+
+## bootify
+
+https://bootify.io/app/57TXUJDI4U5Y
+
 
 ## CRUD de productos
 
@@ -50,4 +58,3 @@ API REST shoppingcarts:
 * DELETE /api/shoppingcarts/:cart_id/product/:prod_id - Borra un producto específico de un carrito de compra
 
 
-https://bootify.io/app/X11EHHCRQCVS
