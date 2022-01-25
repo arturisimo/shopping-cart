@@ -11,8 +11,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.server.ResponseStatusException;
 
+import edu.cloud.apps.exception.NotFoundInCartException;
 import edu.cloud.apps.model.ErrorResponse;
 import edu.cloud.apps.model.FieldError;
 
@@ -49,12 +51,26 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
     
-    @ExceptionHandler(NoSuchElementException.class)
+    
+    @ExceptionHandler(NotFoundInCartException.class )
+    public ResponseEntity<ErrorResponse> handleNotFoundInCart(final Throwable exception) {
+        return handle404(exception);
+    }
+    
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class )
+	public ResponseEntity<ErrorResponse> handle400(final Throwable exception) { 
+	    final ErrorResponse errorResponse = new ErrorResponse();
+	    errorResponse.setHttpStatus(HttpStatus.NOT_FOUND.value());
+	    errorResponse.setException(exception.getClass().getSimpleName());
+	    return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+	}
+    
+    @ExceptionHandler(NoSuchElementException.class )
     public ResponseEntity<ErrorResponse> handle404(final Throwable exception) {
         final ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setHttpStatus(HttpStatus.NOT_FOUND.value());
+        errorResponse.setHttpStatus(HttpStatus.BAD_REQUEST.value());
         errorResponse.setException(exception.getClass().getSimpleName());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Throwable.class)

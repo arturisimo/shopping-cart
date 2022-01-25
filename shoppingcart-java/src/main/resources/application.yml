@@ -3,6 +3,9 @@ spring:
     url: ${JDBC_DATABASE_URL:jdbc:h2:mem:shoppingcart-java}
     username: ${JDBC_DATABASE_USERNAME:sa}
     password: ${JDBC_DATABASE_PASSWORD:}
+  h2:
+    console:
+      enabled: true  
   dbcp2:
     max-wait-millis: 30000
     validation-query: "SELECT 1"

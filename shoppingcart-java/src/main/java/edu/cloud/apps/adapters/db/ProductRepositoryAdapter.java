@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import edu.cloud.apps.adapters.db.entity.ProductEntity;
 import edu.cloud.apps.dto.ProductDTO;
 import edu.cloud.apps.ports.db.ProductRepositoryUseCase;
-import edu.cloud.apps.repos.ProductRepository;
+import edu.cloud.apps.repository.ProductRepository;
 
 @Service
 public class ProductRepositoryAdapter implements ProductRepositoryUseCase {

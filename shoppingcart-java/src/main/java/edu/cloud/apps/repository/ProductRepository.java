@@ -1,4 +1,4 @@
-package edu.cloud.apps.repos;
+package edu.cloud.apps.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

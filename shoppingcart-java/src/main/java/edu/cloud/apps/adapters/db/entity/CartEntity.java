@@ -1,5 +1,6 @@
 package edu.cloud.apps.adapters.db.entity;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,10 +22,16 @@ public class CartEntity {
     @Column(nullable = false)
     private Boolean finalized;
     
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "cart", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
     private Set<ProductCartEntity> products;
+    
+    public CartEntity() {
+    	super();
+		this.finalized = Boolean.FALSE;
+		this.products = new LinkedHashSet<>();
+	}
 
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 

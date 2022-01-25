@@ -3,19 +3,26 @@ package edu.cloud.apps.adapters.web.dto;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import edu.cloud.apps.dto.ProductCartDTO;
+import com.fasterxml.jackson.annotation.JsonView;
 
 public class CartResponseDTO {
 	
+    private Long id;
+	
+    @JsonView({Basic.class})
 	private Boolean finalized;
     
-    private Set<ProductCartDTO> products;
-
-    public Set<ProductCartDTO> getProducts() {
+    @JsonView({Basic.class})
+    private Set<ProductCartResponseDTO> products;
+    
+    public interface Basic {
+   	}
+    
+    public Set<ProductCartResponseDTO> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<ProductCartDTO> products) {
+	public void setProducts(Set<ProductCartResponseDTO> products) {
 		this.products = products;
 	}
 
@@ -32,6 +39,13 @@ public class CartResponseDTO {
     public void setFinalized(final Boolean finalized) {
         this.finalized = finalized;
     }
-	
+    
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }

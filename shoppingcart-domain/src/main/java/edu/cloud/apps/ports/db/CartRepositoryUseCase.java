@@ -3,16 +3,16 @@ package edu.cloud.apps.ports.db;
 import java.util.List;
 import java.util.Optional;
 
-import edu.cloud.apps.dto.ShoppingCartDTO;
+import edu.cloud.apps.dto.CartDTO;
 
 public interface CartRepositoryUseCase {
 	
-	List<ShoppingCartDTO> findAll();
+	List<CartDTO> findAll();
 
-	Optional<ShoppingCartDTO> findById(Long id);
+	Optional<CartDTO> findById(Long id);
 	
-	ShoppingCartDTO save(ShoppingCartDTO shoppingCartDTO);
+	CartDTO save(CartDTO CartDTO);
 
-	Optional<ShoppingCartDTO> delete(Long id, Long productId);
+	Optional<CartDTO> deleteById(Long id);
 	
 }

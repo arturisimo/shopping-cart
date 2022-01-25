@@ -4,7 +4,7 @@ import java.util.Set;
 
 import edu.cloud.apps.exception.StockException;
 
-public class ShoppingCart {
+public class Cart {
 
     private Long id;
 
@@ -36,7 +36,7 @@ public class ShoppingCart {
 		this.products = products;
 	}
 	
-	public ShoppingCart validate() {
+	public Cart validate() {
 		products.forEach(productCart -> {
 			Product product = productCart.getProduct();
 			Integer newStock = product.getStock() - productCart.getQuantity();

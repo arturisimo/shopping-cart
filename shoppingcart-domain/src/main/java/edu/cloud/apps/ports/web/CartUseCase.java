@@ -2,20 +2,22 @@ package edu.cloud.apps.ports.web;
 
 import java.util.List;
 
-import edu.cloud.apps.dto.ShoppingCartDTO;
+import edu.cloud.apps.dto.CartDTO;
 
 public interface CartUseCase {
 	
-    List<ShoppingCartDTO> findAll();
+    List<CartDTO> findAll();
 
-    ShoppingCartDTO get(final Long id);
+    CartDTO get(final Long id);
 
-    ShoppingCartDTO create(final ShoppingCartDTO shoppingCartDTO);
+    CartDTO create(final CartDTO shoppingCartDTO);
+    
+    CartDTO remove(Long id);
+    
+    CartDTO finalizeShoppingCart(Long id);
 
-    ShoppingCartDTO finalizeShoppingCart(Long id);
+    CartDTO removeProduct(final Long id, Long productId);
 
-    ShoppingCartDTO delete(final Long id, Long productId);
-
-    ShoppingCartDTO addProduct(Long id, Long productId, Integer quantity);
+    CartDTO addProduct(Long id, Long productId, Integer quantity);
 	
 }

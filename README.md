@@ -1,10 +1,20 @@
 # shopping-cart
-Ejemplo arquitectura hexagonal. SpringBoot - NodeJS
+Ejemplo arquitectura hexagonal. SpringBoot
 
+Aplicación de comercio electrónico. La aplicación proporciona dos casos de uso diferentes:
 
 ![Hexagonal](doc/hex.png)
 
-Aplicación de comercio electrónico. La aplicación proporciona dos casos de uso diferentes:
+
+## Open Api
+
+http://localhost:8080/swagger-ui/index.html
+
+## Consola H2
+
+http://localhost:8080/h2-console/
+
+jdbc:h2:mem:shoppingcart-java
 
 ## CRUD de productos
 
@@ -39,7 +49,5 @@ API REST shoppingcarts:
 * POST /api/shoppingcarts/:cart_id/product/:prod_id/quantity/:prod_quantity - Añade un producto al carrito de compra, en la cantidad indicada por :prod_quantity. Si ya existiera lo modifica con la nueva cantidad. Debe validar que hay suficiente stock.
 * DELETE /api/shoppingcarts/:cart_id/product/:prod_id - Borra un producto específico de un carrito de compra
 
-
-JAVA
 
 https://bootify.io/app/X11EHHCRQCVS

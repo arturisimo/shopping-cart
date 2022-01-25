@@ -1,13 +1,23 @@
 package edu.cloud.apps.adapters.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 public class ProductResponseDTO {
 
-    private String brand;
+    private Long id;
+	
+    @JsonView({Basic.class, CartResponseDTO.Basic.class})
+	private String brand;
 
+    @JsonView({Basic.class, CartResponseDTO.Basic.class})
     private Integer stock;
 
+    @JsonView({Basic.class, CartResponseDTO.Basic.class})
     private String name;    
-
+    
+    public interface Basic {
+	}
+    
     public String getBrand() {
         return brand;
     }
@@ -34,6 +44,15 @@ public class ProductResponseDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+
 	}
 
 }

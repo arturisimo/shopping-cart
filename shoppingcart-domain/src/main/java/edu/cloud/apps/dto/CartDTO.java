@@ -3,7 +3,7 @@ package edu.cloud.apps.dto;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class ShoppingCartDTO {
+public class CartDTO {
 
     private Long id;
 
@@ -19,7 +19,7 @@ public class ShoppingCartDTO {
 		this.products = products;
 	}
 
-	public ShoppingCartDTO() {
+	public CartDTO() {
 		super();
 		this.finalized = Boolean.FALSE;
 		this.products = new LinkedHashSet<>();
