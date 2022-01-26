@@ -15,4 +15,5 @@ public interface CartRepositoryUseCase {
 
 	Optional<CartDTO> deleteById(Long id);
 	
+	//CartDTO validate(CartDTO CartDTO);
 }

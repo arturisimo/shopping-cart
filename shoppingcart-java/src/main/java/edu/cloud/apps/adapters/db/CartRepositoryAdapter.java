@@ -47,6 +47,23 @@ public class CartRepositoryAdapter implements CartRepositoryUseCase {
 		return cart;
 	}
 	
+	/*
+	@Override
+	public CartDTO validate(CartDTO cartDTO) {
+		CartEntity cart = toEntity(cartDTO);
+		cart.getProducts().forEach(productCart -> {
+				ProductEntity product = productCart.getProduct();
+				Integer newStock = product.getStock() - productCart.getQuantity();
+				if (newStock < 0) {
+					throw new StockException(product.getName());
+				} else {
+					product.setStock(newStock);
+				}
+		});
+		return toDto(cart); 
+	}
+	*/
+	
 	private CartDTO toDto(CartEntity cart) {
 		return modelMapper.map(cart, CartDTO.class);
 	}

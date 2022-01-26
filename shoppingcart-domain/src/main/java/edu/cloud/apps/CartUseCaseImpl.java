@@ -34,7 +34,6 @@ public class CartUseCaseImpl implements CartUseCase {
 	@Override
 	public List<CartDTO> findAll() {
 		return cartRepository.findAll();
-				
 	}
 
 	@Override
@@ -46,8 +45,6 @@ public class CartUseCaseImpl implements CartUseCase {
 	public CartDTO create(CartDTO shoppingCartDTO) {
 		return cartRepository.save(shoppingCartDTO);
 	}
-	
-	
 
 	@Override
 	public CartDTO finalizeShoppingCart(Long id) {
